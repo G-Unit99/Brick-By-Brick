@@ -1,0 +1,6 @@
+#This function attempts to find a correlation between black and white home ownership within St. Louis
+import pandas as pd
+
+data = pd.read_csv('https://pastebin.com/raw/G5A17VVV')
+
+print(data)

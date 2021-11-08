@@ -1,0 +1,29 @@
+#Similar to function 1 this function uses the pandas library to read in CVS data
+#After reading in said data, this function also maps the data to a bar graph, however this bar graph is composed of crime data in St. Louis from the year 2019-2020
+import pandas as pd
+import matplotlib.pyplot as plt
+
+year = [2019, 2020]
+month = 0
+months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
+url_prefix = 'https://raw.githubusercontent.com/genericlastname/hackhpc-urban-renewal/master/'
+tempCrimesarr1 = []
+tempCrimesarr2 = []
+crimesByYear = []
+
+for x in year:
+  for m in months:
+    if x < 2020 and x >= 2019:
+      tempCrimesarr1.append(pd.read_csv("{}{}{}.CSV".format(url_prefix, m, x),encoding="latin-1"))
+    elif x == 2020: 
+      tempCrimesarr2.append(pd.read_csv("{}{}{}.CSV".format(url_prefix, m, x),encoding="latin-1"))
+  
+month = 0
+
+crimesByYear = [tempCrimesarr1, tempCrimesarr2]
+print("This is for 2019\n", crimesByYear[0])
+#print("This is for 2020\n", crimesByYear[1])
+plt.bar(year, [len(crimesByYear[0]), len(crimesByYear[1])], color ='maroon', width = .4)
+plt.xlabel("Year")
+plt.ylabel("Number of Reported Crimes")
+plt.title("Crimes Reported In St. Louis 2019-2020")

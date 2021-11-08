@@ -1,5 +1,5 @@
 #Function is written in python and uses the pandas library to read CVS file data
-#From there the data is processed into a bar graph
+#From there the data is processed into a bar graph composed of housing data in St. Louis from 2019-2020
 
 import pandas as pd
 import matplotlib.pyplot as plt

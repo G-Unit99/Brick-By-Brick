@@ -1,0 +1,26 @@
+#This function shows a graphical map of areas plotted within St. Louis
+
+import folium
+import pandas as pd
+
+stlMap = folium.Map(
+    location=[38.627003, -90.199402],
+    zoom_start=12,
+    max_zoom=18)
+
+months = ['February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
+url_prefix = 'https://raw.githubusercontent.com/genericlastname/hackhpc-urban-renewal/master/'
+crimes_2020 = pd.read_csv(url_prefix + "January2020.CSV", encoding='latin-1')
+
+for month in months:
+  curr = pd.read_csv(url_prefix + month + "2020.CSV", encoding="latin-1", skiprows=1)
+  crimes_2020.append(curr)
+
+for index, row in crimes_2020.iterrows():
+  print('{}, {}'.format(row['XCoord'], row['YCoord']))
+  folium.Marker([38.627003, -90.199402],
+                icon=folium.Icon(color='red')
+                ).add_to(stlMap)
+
+
+stlMap
